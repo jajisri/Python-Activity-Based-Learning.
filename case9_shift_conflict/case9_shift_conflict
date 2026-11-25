@@ -1,0 +1,40 @@
+# Tuple-Based Employee Shift Conflict Detection
+
+shifts = [
+    ("Ravi", 9, 13),
+    ("Sita", 9, 14),
+    ("Ravi", 12, 16),
+    ("Arjun", 10, 15),
+    ("Sita", 15, 19),
+    ("Ravi", 16, 20)
+]
+
+conflicts = []
+
+print("===== EMPLOYEE SHIFT SCHEDULE =====")
+
+for name, start, end in shifts:
+    print(name, "-", start, "to", end)
+
+print("\n===== SHIFT CONFLICTS =====")
+
+for i in range(len(shifts)):
+    for j in range(i + 1, len(shifts)):
+
+        name1, start1, end1 = shifts[i]
+        name2, start2, end2 = shifts[j]
+
+        # Check if the same employee has overlapping shifts
+        if name1 == name2 and start1 < end2 and start2 < end1:
+            conflicts.append((name1, shifts[i], shifts[j]))
+
+            print("\nEmployee:", name1)
+            print("Shift 1:", start1, "to", end1)
+            print("Shift 2:", start2, "to", end2)
+            print("Status: Conflict Detected")
+
+if len(conflicts) == 0:
+    print("No shift conflicts found")
+
+print("\nTotal Conflicts:", len(conflicts))
+print("===== ANALYSIS COMPLETED =====")
